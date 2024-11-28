@@ -12,7 +12,6 @@ export default function SummaryScreen({ route }) {
       const storedData = await AsyncStorage.getItem(month);
       const tasks = storedData ? JSON.parse(storedData) : [];
       
-      // Processa os dados para o gráfico
       const groupedData = tasks.reduce((acc, task) => {
         if (!acc[task.category]) acc[task.category] = 0;
         acc[task.category] += parseFloat(task.value || 0);
@@ -33,7 +32,7 @@ export default function SummaryScreen({ route }) {
     fetchData();
   }, [month]);
 
-  // Gera cores aleatórias para cada categoria
+  
   const getRandomColor = () =>
     `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 

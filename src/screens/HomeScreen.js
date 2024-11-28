@@ -6,16 +6,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const HomeScreen = ({ navigation }) => {
   const [expenses, setExpenses] = useState({});
   
-  // Lista dos meses do ano
+
   const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
   ];
 
-  // Função para carregar as despesas de AsyncStorage
+
   const loadExpenses = async () => {
     try {
-      // Carregar as despesas de cada mês
+
       const storedExpenses = {};
       for (let month of months) {
         const monthExpenses = await AsyncStorage.getItem(`@expenses_${month}`);
@@ -31,16 +31,16 @@ const HomeScreen = ({ navigation }) => {
     }
   };
 
-  // Carregar despesas ao focar na tela
+
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      loadExpenses(); // Atualiza os dados sempre que a tela é focada
+      loadExpenses();
     });
 
-    return unsubscribe; // Limpa o listener ao desmontar o componente
+    return unsubscribe; 
   }, [navigation]);
 
-  // Renderizar o card de cada mês
+
   const renderMonth = ({ item }) => (
     <TouchableOpacity
       style={styles.monthCard}

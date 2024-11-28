@@ -8,14 +8,14 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Importe AsyncStorage
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MonthDetailsScreen = ({ route, navigation }) => {
   const { month } = route.params;
   const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
-    // Aqui carregamos as despesas salvas para este mês usando AsyncStorage
+
     const loadExpenses = async () => {
       try {
         const savedExpenses = await AsyncStorage.getItem(`@expenses_${month}`);
@@ -38,13 +38,13 @@ const MonthDetailsScreen = ({ route, navigation }) => {
           text: 'Deletar',
           onPress: async () => {
             try {
-              // Filtra as despesas para remover a despesa com o ID fornecido
+
               const updatedExpenses = expenses.filter((item) => item.id !== id);
   
-              // Atualiza o estado
+
               setExpenses(updatedExpenses);
   
-              // Salva a lista atualizada no AsyncStorage
+
               await AsyncStorage.setItem(`@expenses_${month}`, JSON.stringify(updatedExpenses));
   
               console.log('Despesa deletada com sucesso:', updatedExpenses);

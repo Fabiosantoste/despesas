@@ -9,7 +9,7 @@ const AddExpenseScreen = ({ route, navigation }) => {
   const [amount, setAmount] = useState(expense?.amount || '');
   const [category, setCategory] = useState(expense?.category || '');
 
-  // Definindo as categorias e seus ícones
+
   const categories = [
     { id: 'food', name: 'Alimentação', icon: 'fast-food' },
     { id: 'transport', name: 'Transporte', icon: 'car' },
@@ -19,7 +19,7 @@ const AddExpenseScreen = ({ route, navigation }) => {
     { id: 'health', name: 'Saúde', icon: 'medkit' },
   ];
 
-  // Função para salvar ou atualizar a despesa no AsyncStorage
+
   const handleSave = async () => {
     if (!name || !amount || !category) {
       Alert.alert('Erro', 'Por favor, preencha todos os campos.');
@@ -34,13 +34,13 @@ const AddExpenseScreen = ({ route, navigation }) => {
     };
 
     try {
-      // Recupera as despesas do mês
+
       const storedExpenses = await AsyncStorage.getItem(`@expenses_${month}`);
       const expenses = storedExpenses ? JSON.parse(storedExpenses) : [];
 
       console.log('Despesas carregadas do AsyncStorage:', expenses);
 
-      // Se for uma atualização, substitui a despesa existente
+
       if (expense) {
         const updatedExpenses = expenses.map((item) =>
           item.id === expense.id ? newExpense : item
@@ -49,18 +49,17 @@ const AddExpenseScreen = ({ route, navigation }) => {
 
         await AsyncStorage.setItem(`@expenses_${month}`, JSON.stringify(updatedExpenses));
       } else {
-        // Se for uma nova despesa, adiciona à lista
+
         expenses.push(newExpense);
         console.log('Despesas após adicionar nova:', expenses);
 
         await AsyncStorage.setItem(`@expenses_${month}`, JSON.stringify(expenses));
       }
-
-      // Verificar se o armazenamento foi atualizado corretamente
+      
       const updatedStoredExpenses = await AsyncStorage.getItem(`@expenses_${month}`);
       console.log('Despesas após o setItem:', updatedStoredExpenses);
 
-      // Volta para a tela anterior após salvar
+
       navigation.goBack();
     } catch (error) {
       console.error('Erro ao salvar a despesa', error);

@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen';
 import MonthDetailsScreen from './src/screens/MonthDetailsScreen';
 import SummaryScreen from './src/screens/SummaryScreen';
-import AddExpenseScreen from './src/screens/AddExpenseScreen';  // Adicionando o import
+import AddExpenseScreen from './src/screens/AddExpenseScreen';
 
 const Stack = createStackNavigator();
 
@@ -28,8 +28,8 @@ export default function App() {
           options={{ title: 'Resumo do Mês' }} 
         />
         <Stack.Screen 
-          name="AddExpense"  // Nome da tela
-          component={AddExpenseScreen}  // Componente de adição de despesa
+          name="AddExpense"
+          component={AddExpenseScreen}
           options={{ title: 'Adicionar Despesa' }} 
         />
       </Stack.Navigator>
